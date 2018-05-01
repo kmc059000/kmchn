@@ -38,9 +38,10 @@ class StoryListItem extends React.Component<IProps, IState> {
 
   public visibleStoryElement(story : IStory) {
     const date = new Date(story.time * 1000);
+    const scoreClasses = story.score < 50 ? 'story-score' : story.score < 100 ? 'story-score popular' : 'story-score very-popular';
     return (
       <div className="story-list-item">
-        <div className="story-score">{story.score}</div>
+        <div className={scoreClasses}>{story.score}</div>
         {' '}
         <div className="story-title" title={story.title}>{story.title}</div>
         {' '}

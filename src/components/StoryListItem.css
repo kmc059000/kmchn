@@ -8,6 +8,14 @@
   display: inline-block;
 }
 
+.story-list-item .story-score.popular {
+  color: rgb(131, 19, 19);
+}
+
+.story-list-item .story-score.very-popular {
+  color: rgb(235, 19, 19);
+}
+
 .story-list-item .story-title {
   font-size: 1.2rem;
   display: inline-block;
