@@ -1,10 +1,25 @@
 import * as React from 'react';
 import './App.css';
-import { fetchTopStories } from './'
+import HnRestApi from './services/HnRestApi';
+const api = new HnRestApi();
 
-class App extends React.Component {
-  public componentDidMount() {
+interface IAppState {
+  topStories : number[],
+}
 
+class App extends React.Component<any, IAppState> {
+  constructor(props : any) {
+    super(props);
+    this.state = {
+      topStories: [],
+    };
+  }
+  public async componentDidMount() {
+    const results = await api.fetchTopStories();
+    this.setState({
+      ...this.state,
+      topStories: results,
+    });
   }
   public render() {
     return (
@@ -14,6 +29,7 @@ class App extends React.Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload. Hello world
+          {this.state.topStories.map(x => <div key={x}>{x}</div>)}
         </p>
       </div>
     );
