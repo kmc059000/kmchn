@@ -6,7 +6,19 @@ const options = {
     method: 'GET',
 };
 
-export default class HnRestApi {
+export interface IStory {
+  id: number,
+  by: string,
+  decsendants: number,
+  kids: number[],
+  score: number,
+  time: number,
+  title: string,
+  type: string,
+  url: string,
+}
+
+export class HnRestApi {
     public async fetchTopStories() {
         const response = await fetch(`${endpoint}/topstories.json`, options);
         if (response.ok) {
@@ -16,7 +28,13 @@ export default class HnRestApi {
 
         return [];        
     }
-    public fetchStory(id : number) {
-        return fetch(`${endpoint}/item/${id}.json`, options);
+    public async fetchStory(id : number) {
+        const response = await fetch(`${endpoint}/item/${id}.json`, options);
+        if (response.ok) {
+            const result = await response.json();
+            return result as IStory;
+        }
+
+        return null;
     }
 } 

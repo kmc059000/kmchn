@@ -1,24 +1,38 @@
 import * as React from 'react';
 import './App.css';
-import HnRestApi from './services/HnRestApi';
+import { HnRestApi, IStory } from './services/HnRestApi';
+
+import StoryListItem from './components/StoryListItem';
+
 const api = new HnRestApi();
 
+interface IStoryHashMap {
+  [key: number]: IStory,
+}
+
 interface IAppState {
+  page: number,
+  stories: IStoryHashMap,
   topStories : number[],
+  visibleStoryIds: number[],
 }
 
 class App extends React.Component<any, IAppState> {
   constructor(props : any) {
     super(props);
     this.state = {
+      page: 1,
+      stories: {},
       topStories: [],
+      visibleStoryIds: [],
     };
   }
   public async componentDidMount() {
     const results = await api.fetchTopStories();
     this.setState({
-      ...this.state,
+      page: 1,
       topStories: results,
+      visibleStoryIds: results.slice(0, 20),
     });
   }
   public render() {
@@ -29,8 +43,8 @@ class App extends React.Component<any, IAppState> {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload. Hello world
-          {this.state.topStories.map(x => <div key={x}>{x}</div>)}
         </p>
+        {this.state.visibleStoryIds.map(x => <StoryListItem key={x} storyId={x} />)}
       </div>
     );
   }
