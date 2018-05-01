@@ -32,7 +32,7 @@ class App extends React.Component<any, IAppState> {
     this.setState({
       page: 1,
       topStories: results,
-      visibleStoryIds: results.slice(0, 20),
+      visibleStoryIds: results.slice(0, 30),
     });
   }
   public render() {
