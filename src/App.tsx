@@ -41,9 +41,6 @@ class App extends React.Component<any, IAppState> {
         <header className="App-header">
           <h1 className="App-title">hn clone</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload. Hello world
-        </p>
         {this.state.visibleStoryIds.map(x => <StoryListItem key={x} storyId={x} />)}
       </div>
     );
