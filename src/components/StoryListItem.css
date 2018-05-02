@@ -4,7 +4,7 @@
 }
 
 .story-list-item .story-score {
-  font-size: 1rem;
+  font-size: .9rem;
   min-width: 4rem;
   display: inline-block;
   text-align: center;
@@ -19,7 +19,7 @@
 }
 
 .story-list-item .story-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: inline-block;
   margin-right: 1rem;
   max-width: 600px;
@@ -30,18 +30,18 @@
 }
 
 .story-list-item .story-by {
-  font-size: .75rem;
+  font-size: .7rem;
   display: inline-block;
 }
 
 .story-list-item .story-time {
-  font-size: .75rem;
+  font-size: .7rem;
   display: inline-block;
   margin-right: 1rem;
 }
 
 .story-list-item .story-link {
-  font-size: .75rem;
+  font-size: .6rem;
   display: inline-block;
 }
 
