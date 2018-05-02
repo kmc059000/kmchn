@@ -39,15 +39,24 @@ class StoryListItem extends React.Component<IProps, IState> {
   public visibleStoryElement(story : IStory) {
     const date = new Date(story.time * 1000);
     const scoreClasses = story.score < 50 ? 'story-score' : story.score < 100 ? 'story-score popular' : 'story-score very-popular';
+
+    const storyLink = story.url ? (<a href={story.url} target="blank">[Link]</a>) : null
+
     return (
       <div className="story-list-item">
         <div className={scoreClasses}>{story.score}</div>
         {' '}
-        <div className="story-title" title={story.title}>{story.title}</div>
+        <div className="story-title" title={story.title}>
+          {story.title}
+        </div>
         {' '}
         <div className="story-by">by {story.by}</div>
         {' '}
         <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
+        {' '}
+        <div className="story-link">
+          {storyLink}
+        </div>
       </div>
     );
   }

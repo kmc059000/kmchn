@@ -22,7 +22,7 @@
   font-size: 1.2rem;
   display: inline-block;
   margin-right: 1rem;
-  max-width: 700px;
+  max-width: 650px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -35,6 +35,12 @@
 }
 
 .story-list-item .story-time {
+  font-size: .75rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.story-list-item .story-link {
   font-size: .75rem;
   display: inline-block;
 }
