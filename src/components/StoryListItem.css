@@ -1,11 +1,13 @@
 .story-list-item {
-
+  margin: .5rem 0;
+  border-bottom: 1px solid #999;
 }
 
 .story-list-item .story-score {
   font-size: 1rem;
   min-width: 4rem;
   display: inline-block;
+  text-align: center;
 }
 
 .story-list-item .story-score.popular {
