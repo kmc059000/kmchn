@@ -40,7 +40,8 @@ class StoryListItem extends React.Component<IProps, IState> {
     const date = new Date(story.time * 1000);
     const scoreClasses = story.score < 50 ? 'story-score' : story.score < 100 ? 'story-score popular' : 'story-score very-popular';
 
-    const storyLink = story.url ? (<a href={story.url} target="blank">[Link]</a>) : null
+    const storyLink = story.url ? (<a href={story.url} target="blank">[Link]</a>) : null;
+    const commentLink = <a href={`https://news.ycombinator.com/item?id=${story.id}`} target="blank">[Comments]</a>;
 
     return (
       <div className="story-list-item">
@@ -55,7 +56,7 @@ class StoryListItem extends React.Component<IProps, IState> {
         <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
         {' '}
         <div className="story-link">
-          {storyLink}
+          {storyLink} {commentLink}
         </div>
       </div>
     );
