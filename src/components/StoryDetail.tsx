@@ -44,6 +44,7 @@ class StoryDetail extends React.Component<IProps, IState> {
     const date = new Date(story.time * 1000);
     return (
       <div className="StoryDetails">
+      
          <StoryScore story={story} />
           {' '}
           <div className="story-title">

@@ -3,25 +3,21 @@
   border-bottom: 1px solid #999;
 }
 
-.story-list-item .story-score {
+.story-score {
   font-size: .9rem;
   min-width: 4rem;
   display: inline-block;
   text-align: center;
 }
-
-.story-list-item .story-score.popular {
+.story-score.popular {
   color: rgb(131, 19, 19);
 }
 
-.story-list-item .story-score.very-popular {
+.story-score.very-popular {
   color: rgb(235, 19, 19);
 }
 
 .story-list-item .story-title {
-  font-size: 1.1rem;
-  display: inline-block;
-  margin-right: 1rem;
   max-width: 600px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -29,22 +25,29 @@
   vertical-align: middle;
 }
 
-.story-list-item .story-by {
+
+.story-title {
+  font-size: 1.1rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.story-by {
   font-size: .7rem;
   display: inline-block;
 }
 
-.story-list-item .story-time {
+.story-time {
   font-size: .7rem;
   display: inline-block;
   margin-right: 1rem;
 }
 
-.story-list-item .story-link {
+.story-link {
   font-size: .6rem;
   display: inline-block;
 }
 
-.story-list-item .story-link a {
+.story-link a {
   margin-right: .25rem;
 }
