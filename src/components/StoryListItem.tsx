@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { TimeAgo } from 'react-time-ago';
 import { HnRestApi, IStory } from '../services/HnRestApi';
 import './StoryListItem.css';
@@ -48,7 +49,7 @@ class StoryListItem extends React.Component<IProps, IState> {
         <div className={scoreClasses}>{story.score}</div>
         {' '}
         <div className="story-title" title={story.title}>
-          {story.title}
+          <Link to={`/story/${story.id}`}>{story.title}</Link>
         </div>
         {' '}
         <div className="story-by">by {story.by}</div>
