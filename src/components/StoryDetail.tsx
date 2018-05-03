@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { TimeAgo } from 'react-time-ago';
 import { HnRestApi, IStory } from '../services/HnRestApi';
 
+import Comment from './Comment';
 import CommentLink from './CommentLink';
 import StoryLink from './StoryLink';
 import StoryScore from './StoryScore';
@@ -13,7 +14,6 @@ interface IRouterProps {
 }
 
 interface IProps extends RouteComponentProps<IRouterProps> {
-  storyId: number,
 }
 
 interface IState {
@@ -44,20 +44,24 @@ class StoryDetail extends React.Component<IProps, IState> {
     const date = new Date(story.time * 1000);
     return (
       <div className="StoryDetails">
-      
-         <StoryScore story={story} />
-          {' '}
-          <div className="story-title">
-            <StoryTitle story={story} />
+        <div>
+          <StoryScore story={story} />
+            {' '}
+            <div className="story-title">
+              <StoryTitle story={story} />
+            </div>
+            {' '}
+            <div className="story-by">by {story.by}</div>
+            {' '}
+            <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
+            {' '}
+            <div className="story-link">
+              <StoryLink story={story} />
+              <CommentLink story={story} />
           </div>
-          {' '}
-          <div className="story-by">by {story.by}</div>
-          {' '}
-          <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
-          {' '}
-          <div className="story-link">
-            <StoryLink story={story} />
-            <CommentLink story={story} />
+        </div>
+        <div>
+          {story.kids.map(x => <Comment commentId={x} key={x} />)}
         </div>
       </div>
     ); 

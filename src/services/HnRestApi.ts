@@ -18,6 +18,16 @@ export interface IStory {
   url: string,
 }
 
+export interface IComment {
+    id: number,
+    by: string,
+    kids: number[],
+    text: string,
+    time: number,
+    type: string,
+  }
+  
+
 export class HnRestApi {
     public async fetchTopStories() {
         const response = await fetch(`${endpoint}/topstories.json`, options);
@@ -33,6 +43,16 @@ export class HnRestApi {
         if (response.ok) {
             const result = await response.json();
             return result as IStory;
+        }
+
+        return null;
+    }
+
+    public async fetchComment(id : number) {
+        const response = await fetch(`${endpoint}/item/${id}.json`, options);
+        if (response.ok) {
+            const result = await response.json();
+            return result as IComment;
         }
 
         return null;
