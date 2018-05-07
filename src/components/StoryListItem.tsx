@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { TimeAgo } from 'react-time-ago';
 import { HnRestApi, IStory } from '../services/HnRestApi';
 import './StoryListItem.css';
 
@@ -7,6 +6,7 @@ import CommentLink from './CommentLink';
 import StoryLink from './StoryLink';
 import StoryScore from './StoryScore';
 import StoryTitle from './StoryTitle';
+import TimeAgo from './TimeAgo';
 
 const api = new HnRestApi();
 
@@ -42,8 +42,6 @@ class StoryListItem extends React.Component<IProps, IState> {
   }
 
   public visibleStoryElement(story : IStory) {
-    const date = new Date(story.time * 1000);
-
     return (
       <div className="story-list-item">
         <StoryScore story={story} />
@@ -54,7 +52,9 @@ class StoryListItem extends React.Component<IProps, IState> {
         {' '}
         <div className="story-by">by {story.by}</div>
         {' '}
-        <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
+        <div className="story-time">
+          <TimeAgo unixTime={story.time} />
+        </div>
         {' '}
         <div className="story-link">
           <StoryLink story={story} />

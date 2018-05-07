@@ -3,6 +3,8 @@ import { RouteComponentProps } from 'react-router-dom';
 import { TimeAgo } from 'react-time-ago';
 import { HnRestApi, IStory } from '../services/HnRestApi';
 
+import './StoryDetail.css';
+
 import Comment from './Comment';
 import CommentLink from './CommentLink';
 import StoryLink from './StoryLink';
