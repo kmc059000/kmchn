@@ -11,6 +11,7 @@ interface IProps {
 
 interface IState {
   comment: IComment | null,
+  expanded: boolean,
 }
 
 const api = new HnRestApi();
@@ -20,12 +21,20 @@ class Comment extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       comment: null,
+      expanded: true,
     };
+
+    this.toggleExpanded = this.toggleExpanded.bind(this);
   }
   public async componentDidMount() {
     const comment = await api.fetchComment(this.props.commentId);
     this.setState({
       comment,
+    });
+  }
+  public toggleExpanded() {
+    this.setState({
+      expanded: !this.state.expanded,
     });
   }
   public render() : any {
@@ -34,15 +43,25 @@ class Comment extends React.Component<IProps, IState> {
       return '';
     }
     
+    let children = null;
+    if (this.state.expanded) {
+      children = (
+        <div className="CommentChildren">
+          {comment.kids ? comment.kids.map(x => <Comment commentId={x} key={x} />) : ''}
+        </div>);
+    }
+
     return (
       <div className="CommentDetails">
         <div className="Comment">
-          <div className="CommentHeader">{comment.by} said <TimeAgo unixTime={comment.time} />:</div>
+          <div className="CommentHeader">
+            <button className="CommentToggle" onClick={this.toggleExpanded}>[{this.state.expanded ? '-' : '+'}]</button>
+            {' '}
+            {comment.by} said <TimeAgo unixTime={comment.time} />:
+          </div>
           <div dangerouslySetInnerHTML={ { __html: comment.text } } />        
         </div>
-        <div className="CommentChildren">
-          {comment.kids ? comment.kids.map(x => <Comment commentId={x} key={x} />) : ''}
-        </div>
+        {children}
       </div>
     ); 
   }
