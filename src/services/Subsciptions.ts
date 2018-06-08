@@ -12,22 +12,23 @@ export interface IEntitySubscribers<T> {
 export class SubscriptionManager<T> {
     private store: IEntityStore<T>;
     private subscribers: IEntitySubscribers<T>;
-    constructor() {
+    private fetcher : (key : number) => Promise<T | null>
+    constructor(fetcher : (key : number) => Promise<T | null>) {
         this.store = {};
         this.subscribers = {};
+        this.fetcher = fetcher;
     }
 
     public async subscribe(
         key : number,
-        subscriber : ISubscriber<T>,
-        fetcher : (key : number) => Promise<T | null>) {
+        subscriber : ISubscriber<T>) {
     
         this.subscribers[key] = this.subscribers[key] || [];
         this.subscribers[key].push(subscriber);
     
         let entity = this.store[key];
         if (!entity) {
-            const loadedEntity = await fetcher(key);
+            const loadedEntity = await this.fetcher(key);
             if (loadedEntity) {
                 this.store[key] = entity = loadedEntity;
             }

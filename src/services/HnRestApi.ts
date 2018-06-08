@@ -1,5 +1,3 @@
-import { ISubscriber, SubscriptionManager } from './Subsciptions';
-
 const endpoint = 'https://hacker-news.firebaseio.com/v0';
 const options = {
     headers: {
@@ -29,9 +27,6 @@ export interface IComment {
     type: string,
   }
 
-const storyManager = new SubscriptionManager<IStory>();
-const commentManager = new SubscriptionManager<IComment>();
-
 export class HnRestApi {
     public async fetchTopStories() {
         const response = await fetch(`${endpoint}/topstories.json`, options);
@@ -60,21 +55,5 @@ export class HnRestApi {
         }
 
         return null;
-    }
-
-    public async subscribeToComment(id : number, subscriber : ISubscriber<IComment>) {
-        commentManager.subscribe(id, subscriber, x => this.fetchComment(x));
-    }
-
-    public async unsubscribeToComment(id : number, subscriber : ISubscriber<IComment>) {
-        commentManager.unsubscribe(id, subscriber);
-    }
-
-    public async subscribeToStory(id : number, subscriber : ISubscriber<IStory>) {
-        storyManager.subscribe(id, subscriber, x => this.fetchStory(x));
-    }
-
-    public async unsubscribeToStory(id : number, subscriber : ISubscriber<IStory>) {
-        storyManager.unsubscribe(id, subscriber);
     }
 } 

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { HnRestApi, IStory } from '../services/HnRestApi';
+import { IStory } from '../services/HnRestApi';
+import { HnService } from '../services/HnService';
 import './StoryListItem.css';
 
 import CommentLink from './CommentLink';
@@ -7,8 +8,6 @@ import StoryLink from './StoryLink';
 import StoryScore from './StoryScore';
 import StoryTitle from './StoryTitle';
 import TimeAgo from './TimeAgo';
-
-const api = new HnRestApi();
 
 interface IProps {
   storyId: number,
@@ -27,10 +26,10 @@ class StoryListItem extends React.Component<IProps, IState> {
     this.setStory = this.setStory.bind(this);
   }
   public async componentDidMount() {
-    api.subscribeToStory(this.props.storyId, this.setStory);
+    HnService.subscribeToStory(this.props.storyId, this.setStory);
   }
   public componentWillUnmount() {
-    api.unsubscribeToStory(this.props.storyId, this.setStory);
+    HnService.unsubscribeToStory(this.props.storyId, this.setStory);
   }
   public setStory(story : IStory) {
     this.setState({

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { HnRestApi, IComment } from '../services/HnRestApi';
+import { IComment } from '../services/HnRestApi';
+import { HnService } from '../services/HnService';
 import './Comment.css'
 
 import TimeAgo from './TimeAgo';
@@ -14,8 +15,6 @@ interface IState {
   expanded: boolean,
 }
 
-const api = new HnRestApi();
-
 class Comment extends React.Component<IProps, IState> {
   constructor(props : any) {
     super(props);
@@ -28,10 +27,10 @@ class Comment extends React.Component<IProps, IState> {
     this.setComment = this.setComment.bind(this);
   }
   public async componentDidMount() {
-    api.subscribeToComment(this.props.commentId, this.setComment);
+    HnService.subscribeToComment(this.props.commentId, this.setComment);
   }
   public componentWillUnmount() {
-    api.unsubscribeToComment(this.props.commentId, this.setComment);
+    HnService.unsubscribeToComment(this.props.commentId, this.setComment);
   }
   public setComment(comment : IComment) {
     this.setState({
