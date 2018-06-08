@@ -1,0 +1,13 @@
+.Pager { 
+  text-align: center;
+  margin: 2rem 0 5rem 0;
+}
+
+.Pager a {
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.Pager a.current {
+  font-weight: bold;
+}
