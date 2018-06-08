@@ -43,8 +43,10 @@ class Comment extends React.Component<IProps, IState> {
       return '';
     }
     
+    let text = null;
     let children = null;
     if (this.state.expanded) {
+      text = <div dangerouslySetInnerHTML={ { __html: comment.text } } />;
       children = (
         <div className="CommentChildren">
           {comment.kids ? comment.kids.map(x => <Comment commentId={x} key={x} />) : ''}
@@ -59,7 +61,7 @@ class Comment extends React.Component<IProps, IState> {
             {' '}
             {comment.by} said <TimeAgo unixTime={comment.time} />:
           </div>
-          <div dangerouslySetInnerHTML={ { __html: comment.text } } />        
+          {text}
         </div>
         {children}
       </div>
