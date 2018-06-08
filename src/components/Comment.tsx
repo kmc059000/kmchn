@@ -25,9 +25,15 @@ class Comment extends React.Component<IProps, IState> {
     };
 
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.setComment = this.setComment.bind(this);
   }
   public async componentDidMount() {
-    const comment = await api.fetchComment(this.props.commentId);
+    api.subscribeToComment(this.props.commentId, this.setComment);
+  }
+  public componentWillUnmount() {
+    api.unsubscribeToComment(this.props.commentId, this.setComment);
+  }
+  public setComment(comment : IComment) {
     this.setState({
       comment,
     });

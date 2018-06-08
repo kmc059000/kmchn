@@ -26,7 +26,20 @@ export interface IComment {
     time: number,
     type: string,
   }
+
+export type ICommentSubscriber = (comment : IComment) => void;
+
+interface ICommentStore {
+    [key: number]: IComment,
+}
+
+interface ICommentSubscribers {
+    [key: number]: ICommentSubscriber[],
+}
   
+
+const comments : ICommentStore = {};
+const commentSubscriptions : ICommentSubscribers = {};
 
 export class HnRestApi {
     public async fetchTopStories() {
@@ -56,5 +69,24 @@ export class HnRestApi {
         }
 
         return null;
+    }
+
+    public async subscribeToComment(id : number, subscriber : ICommentSubscriber) {
+        commentSubscriptions[id] = commentSubscriptions[id] || [];
+        commentSubscriptions[id].push(subscriber);
+
+        let comment= comments[id];
+        if (!comment) {
+            const innerComment = await this.fetchComment(id);
+            if (innerComment) {
+                comments[id] = comment = innerComment;
+            }
+        }
+
+        commentSubscriptions[id].forEach(sub => sub(comment));
+    }
+
+    public async unsubscribeToComment(id : number, subscriber : ICommentSubscriber) {
+        commentSubscriptions[id] = commentSubscriptions[id].filter(x => x !== subscriber);
     }
 } 
