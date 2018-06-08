@@ -1,3 +1,11 @@
+# Hacker News Clone using ReactJS and Typescript
+
+I wrote this to brush up on my react skills and to experiment with typescript.
+
+
+# Technical Details
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Table of Contents
