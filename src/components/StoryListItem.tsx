@@ -24,9 +24,15 @@ class StoryListItem extends React.Component<IProps, IState> {
     this.state = {      
       story: null,
     };
+    this.setStory = this.setStory.bind(this);
   }
   public async componentDidMount() {
-    const story = await api.fetchStory(this.props.storyId);
+    api.subscribeToStory(this.props.storyId, this.setStory);
+  }
+  public componentWillUnmount() {
+    api.unsubscribeToStory(this.props.storyId, this.setStory);
+  }
+  public setStory(story : IStory) {
     this.setState({
       story,
     });

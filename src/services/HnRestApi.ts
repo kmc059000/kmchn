@@ -27,16 +27,55 @@ export interface IComment {
     type: string,
   }
 
-export type ICommentSubscriber = (comment : IComment) => void;
-
-interface ICommentStore {
-    [key: number]: IComment,
+export type ISubscriber<T> = (x : T) => void;
+interface IEntityStore<T> {
+    [key : number] : T,
+}
+interface IEntitySubscribers<T> {
+    [key: number]: Array<ISubscriber<T>>,
 }
 
-interface ICommentSubscribers {
-    [key: number]: ICommentSubscriber[],
-}
+
+export type IStorySubscriber = ISubscriber<IStory>;
+type IStoryStore = IEntityStore<IStory>;
+type IStorySubscribers = IEntitySubscribers<IStory>;
+
+
+export type ICommentSubscriber = ISubscriber<IComment>;
+type ICommentStore = IEntityStore<IComment>;
+type ICommentSubscribers = IEntitySubscribers<IComment>;
   
+
+async function subscribe<T>(
+    key : number,
+    subscriber : ISubscriber<T>,
+    store : IEntityStore<T>,
+    subscribers : IEntitySubscribers<T>,
+    fetcher : (key : number) => Promise<T>) {
+
+    subscribers[key] = subscribers[key] || [];
+    subscribers[key].push(subscriber);
+
+    let entity = store[key];
+    if (!entity) {
+        const loadedEntity = await fetcher(key);
+        if (loadedEntity) {
+            store[key] = entity = loadedEntity;
+        }
+    }
+
+    // todo not sure why the type signature has to be provided here
+    const entitySubscribers : Array<ISubscriber<T>> = subscribers[key];
+    entitySubscribers.forEach(sub => sub(entity));
+}
+
+function unsubscribe<T>(key : number, subscriber : ISubscriber<T>, subscribers : IEntitySubscribers<T>,) {
+    const entitySubscribers : Array<ISubscriber<T>> = subscribers[key];
+    subscribers[key] = entitySubscribers.filter(x => x !== subscriber);
+}
+
+const stories : IStoryStore = {};
+const storySubscriptions : IStorySubscribers = {};
 
 const comments : ICommentStore = {};
 const commentSubscriptions : ICommentSubscribers = {};
@@ -72,21 +111,18 @@ export class HnRestApi {
     }
 
     public async subscribeToComment(id : number, subscriber : ICommentSubscriber) {
-        commentSubscriptions[id] = commentSubscriptions[id] || [];
-        commentSubscriptions[id].push(subscriber);
-
-        let comment= comments[id];
-        if (!comment) {
-            const innerComment = await this.fetchComment(id);
-            if (innerComment) {
-                comments[id] = comment = innerComment;
-            }
-        }
-
-        commentSubscriptions[id].forEach(sub => sub(comment));
+        subscribe(id, subscriber, comments, commentSubscriptions, x => this.fetchComment(x));
     }
 
     public async unsubscribeToComment(id : number, subscriber : ICommentSubscriber) {
-        commentSubscriptions[id] = commentSubscriptions[id].filter(x => x !== subscriber);
+        unsubscribe(id, subscriber, commentSubscriptions);
+    }
+
+    public async subscribeToStory(id : number, subscriber : IStorySubscriber) {
+        subscribe(id, subscriber, stories, storySubscriptions, x => this.fetchStory(x));
+    }
+
+    public async unsubscribeToStory(id : number, subscriber : IStorySubscriber) {
+        unsubscribe(id, subscriber, storySubscriptions);
     }
 } 
