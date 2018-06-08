@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IStory } from '../services/HnRestApi';
+import { IStory } from '../models/Models';
 
 const Score = ({ score }: { score: number}) => {
   const scoreClasses = score < 50 ? 'story-score' : score < 100 ? 'story-score popular' : 'story-score very-popular';

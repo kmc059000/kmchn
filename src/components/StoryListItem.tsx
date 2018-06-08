@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IStory } from '../services/HnRestApi';
+import { IStory } from '../models/Models';
 import { HnService } from '../services/HnService';
 import './StoryListItem.css';
 

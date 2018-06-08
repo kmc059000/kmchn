@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { HnRestApi, IStory } from '../services/HnRestApi';
+import { IStory } from '../models/Models';
+import { HnRestApi } from '../services/HnRestApi';
 
 import StoryListItem from './StoryListItem';
 

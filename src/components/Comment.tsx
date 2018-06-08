@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IComment } from '../services/HnRestApi';
+import { IComment } from '../models/Models';
 import { HnService } from '../services/HnService';
 import './Comment.css'
 

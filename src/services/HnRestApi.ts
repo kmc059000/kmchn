@@ -1,3 +1,5 @@
+import * as Models from '../models/Models';
+
 const endpoint = 'https://hacker-news.firebaseio.com/v0';
 const options = {
     headers: {
@@ -5,27 +7,6 @@ const options = {
     },
     method: 'GET',
 };
-
-export interface IStory {
-  id: number,
-  by: string,
-  decsendants: number,
-  kids: number[],
-  score: number,
-  time: number,
-  title: string,
-  type: string,
-  url: string,
-}
-
-export interface IComment {
-    id: number,
-    by: string,
-    kids: number[],
-    text: string,
-    time: number,
-    type: string,
-  }
 
 export class HnRestApi {
     public async fetchTopStories() {
@@ -41,7 +22,7 @@ export class HnRestApi {
         const response = await fetch(`${endpoint}/item/${id}.json`, options);
         if (response.ok) {
             const result = await response.json();
-            return result as IStory;
+            return result as Models.IStory;
         }
 
         return null;
@@ -51,7 +32,7 @@ export class HnRestApi {
         const response = await fetch(`${endpoint}/item/${id}.json`, options);
         if (response.ok) {
             const result = await response.json();
-            return result as IComment;
+            return result as Models.IComment;
         }
 
         return null;

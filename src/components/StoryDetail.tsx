@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { TimeAgo } from 'react-time-ago';
-import { HnRestApi, IStory } from '../services/HnRestApi';
+import { IStory } from '../models/Models';
+import { HnRestApi } from '../services/HnRestApi';
 
 import './StoryDetail.css';
 
