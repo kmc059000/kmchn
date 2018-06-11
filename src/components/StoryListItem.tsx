@@ -48,22 +48,22 @@ class StoryListItem extends React.Component<IProps, IState> {
 
   public visibleStoryElement(story : IStory) {
     return (
-      <div className="story-list-item">
+      <div className="StoryListItem">
         <StoryScore story={story} />
         {' '}
         <StoryCommentCount story={story} />
         {' '}
-        <div className="story-title">
+        <div className="StoryTitle">
           <StoryTitle story={story} />
         </div>
         {' '}
-        <div className="story-by">by {story.by}</div>
+        <div className="StoryBy">by {story.by}</div>
         {' '}
-        <div className="story-time">
+        <div className="StoryTime">
           <TimeAgo unixTime={story.time} />
         </div>
         {' '}
-        <div className="story-link">
+        <div className="StoryLink">
           <StoryLink story={story} />
           <CommentLink story={story} />
         </div>

@@ -26,7 +26,7 @@ const Score = ({ score, showColor }: { score: number, showColor: boolean}) => {
   const ratio = Math.max(0, Math.min(1, (Math.max(0, score - threshold) / denom) ** power));
   const color = showColor ? calculateColor(ratio) : '';
 
-  return <div className={"story-score"} style={ { color: `#${color}` }}>{score}</div>;
+  return <div className={"StoryScore"} style={ { color: `#${color}` }}>{score}</div>;
 };
 
 export const StoryScore = ({ story }: { story: IStory}) => {

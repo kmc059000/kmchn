@@ -1,16 +1,16 @@
-.story-list-item {
+.StoryListItem {
   margin: .5rem 0;
   border-bottom: 1px solid #999;
 }
 
-.story-score {
+.StoryScore {
   font-size: .9rem;
   min-width: 4rem;
   display: inline-block;
   text-align: center;
 }
 
-.story-list-item .story-title {
+.StoryListItem .StoryTitle {
   max-width: 525px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -19,28 +19,28 @@
 }
 
 
-.story-title {
+.StoryTitle {
   font-size: 1.1rem;
   display: inline-block;
   margin-right: 1rem;
 }
 
-.story-by {
+.StoryBy {
   font-size: .7rem;
   display: inline-block;
 }
 
-.story-time {
+.StoryTime {
   font-size: .7rem;
   display: inline-block;
   margin-right: 1rem;
 }
 
-.story-link {
+.StoryLink {
   font-size: .6rem;
   display: inline-block;
 }
 
-.story-link a {
+.StoryLink a {
   margin-right: .25rem;
 }

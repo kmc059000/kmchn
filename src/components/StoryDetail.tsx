@@ -51,20 +51,20 @@ class StoryDetail extends React.Component<IProps, IState> {
         <div>
           <StoryScore story={story} />
             {' '}
-            <div className="story-title">
+            <div className="StoryTitle">
               <StoryTitle story={story} />
             </div>
             {' '}
-            <div className="story-by">by {story.by}</div>
+            <div className="StoryBy">by {story.by}</div>
             {' '}
-            <div className="story-time"><TimeAgo>{date}</TimeAgo></div>
+            <div className="StoryTime"><TimeAgo>{date}</TimeAgo></div>
             {' '}
-            <div className="story-link">
+            <div className="StoryLink">
               <StoryLink story={story} />
               <CommentLink story={story} />
           </div>
         </div>
-        <div className="story-text">
+        <div className="StoryText">
           <ItemText text={story.text}/>
         </div>
         <div>
