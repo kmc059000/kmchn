@@ -10,7 +10,7 @@ import Comment from './Comment';
 import CommentLink from './CommentLink';
 import ItemText from './ItemText';
 import StoryLink from './StoryLink';
-import { StoryScore } from './StoryScore';
+import { StoryCommentCount, StoryScore } from './StoryScore';
 import StoryTitle from './StoryTitle';
 
 interface IRouterProps {
@@ -50,27 +50,29 @@ class StoryDetail extends React.Component<IProps, IState> {
       <div className="StoryDetails">
         <div>
           <StoryScore story={story} />
-            {' '}
-            <div className="StoryTitle">
-              <StoryTitle story={story} />
-            </div>
-            {' '}
-            <div className="StoryBy">by {story.by}</div>
-            {' '}
-            <div className="StoryTime"><TimeAgo>{date}</TimeAgo></div>
-            {' '}
-            <div className="StoryLink">
-              <StoryLink story={story} />
-              <CommentLink story={story} />
+          {' '}
+          <StoryCommentCount story={story} />
+          {' '}
+          <div className="StoryTitle">
+            <StoryTitle story={story} />
           </div>
-        </div>
-        <div className="StoryText">
-          <ItemText text={story.text}/>
-        </div>
-        <div>
-          {(story.kids || []).map(x => <Comment commentId={x} key={x} />)}
+          {' '}
+          <div className="StoryBy">by {story.by}</div>
+          {' '}
+          <div className="StoryTime"><TimeAgo>{date}</TimeAgo></div>
+          {' '}
+          <div className="StoryLink">
+            <StoryLink story={story} />
+            <CommentLink story={story} />
         </div>
       </div>
+      <div className="StoryText">
+        <ItemText text={story.text}/>
+      </div>
+      <div>
+        {(story.kids || []).map(x => <Comment commentId={x} key={x} />)}
+      </div>
+    </div>
     ); 
   }
 }

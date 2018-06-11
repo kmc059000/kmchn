@@ -18,7 +18,7 @@ function calculateColor(ratio : number) {
 }
 
 
-const Score = ({ score, showColor }: { score: number, showColor: boolean}) => {
+const Score = ({ score, showColor, title }: { score: number, showColor: boolean, title: string}) => {
   const denom = 500;
   const threshold = 50;
   const power = 0.4;
@@ -26,13 +26,13 @@ const Score = ({ score, showColor }: { score: number, showColor: boolean}) => {
   const ratio = Math.max(0, Math.min(1, (Math.max(0, score - threshold) / denom) ** power));
   const color = showColor ? calculateColor(ratio) : '';
 
-  return <div className={"StoryScore"} style={ { color: `#${color}` }}>{score}</div>;
+  return <div className={"StoryScore"} title={title} style={ { color: `#${color}` }}>{score}</div>;
 };
 
 export const StoryScore = ({ story }: { story: IStory}) => {
-  return <Score score={story.score} showColor={true} />;
+  return <Score score={story.score} showColor={true} title="Score" />;
 };
 
 export const StoryCommentCount = ({ story }: { story: IStory}) => {
-  return <Score score={story.descendants} showColor={false} />;
+  return <Score score={story.descendants} showColor={false} title="Comments" />;
 };
