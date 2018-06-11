@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './ItemText.css';
 
 interface IProps {
   text: string,
@@ -10,7 +11,7 @@ class ItemText extends React.Component<IProps, any> {
   }
 
   public render() : any {
-    return <div dangerouslySetInnerHTML={ { __html: this.props.text } } />;
+    return <div className="ItemText" dangerouslySetInnerHTML={ { __html: this.props.text } } />;
   }
 }
 
