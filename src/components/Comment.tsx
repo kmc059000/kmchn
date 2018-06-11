@@ -4,6 +4,7 @@ import { IComment } from '../models/Models';
 import { HnService } from '../services/HnService';
 import './Comment.css'
 
+import ItemText from './ItemText';
 import TimeAgo from './TimeAgo';
 
 interface IProps {
@@ -51,7 +52,7 @@ class Comment extends React.Component<IProps, IState> {
     let text = null;
     let children = null;
     if (this.state.expanded) {
-      text = <div dangerouslySetInnerHTML={ { __html: comment.text } } />;
+      text = <ItemText text={comment.text} />;
       children = (
         <div className="CommentChildren">
           {comment.kids ? comment.kids.map(x => <Comment commentId={x} key={x} />) : ''}

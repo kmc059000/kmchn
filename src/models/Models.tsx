@@ -8,6 +8,7 @@ export interface IStory {
     title: string,
     type: string,
     url: string,
+    text: string,
 }
   
 export interface IComment {

@@ -8,6 +8,7 @@ import './StoryDetail.css';
 
 import Comment from './Comment';
 import CommentLink from './CommentLink';
+import ItemText from './ItemText';
 import StoryLink from './StoryLink';
 import { StoryScore } from './StoryScore';
 import StoryTitle from './StoryTitle';
@@ -63,8 +64,11 @@ class StoryDetail extends React.Component<IProps, IState> {
               <CommentLink story={story} />
           </div>
         </div>
+        <div className="story-text">
+          <ItemText text={story.text}/>
+        </div>
         <div>
-          {story.kids.map(x => <Comment commentId={x} key={x} />)}
+          {(story.kids || []).map(x => <Comment commentId={x} key={x} />)}
         </div>
       </div>
     ); 
