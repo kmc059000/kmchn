@@ -5,7 +5,7 @@ import './StoryListItem.css';
 
 import CommentLink from './CommentLink';
 import StoryLink from './StoryLink';
-import StoryScore from './StoryScore';
+import { StoryCommentCount, StoryScore } from './StoryScore';
 import StoryTitle from './StoryTitle';
 import TimeAgo from './TimeAgo';
 
@@ -50,6 +50,8 @@ class StoryListItem extends React.Component<IProps, IState> {
     return (
       <div className="story-list-item">
         <StoryScore story={story} />
+        {' '}
+        <StoryCommentCount story={story} />
         {' '}
         <div className="story-title">
           <StoryTitle story={story} />

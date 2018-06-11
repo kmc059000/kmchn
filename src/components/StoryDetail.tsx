@@ -9,7 +9,7 @@ import './StoryDetail.css';
 import Comment from './Comment';
 import CommentLink from './CommentLink';
 import StoryLink from './StoryLink';
-import StoryScore from './StoryScore';
+import { StoryScore } from './StoryScore';
 import StoryTitle from './StoryTitle';
 
 interface IRouterProps {

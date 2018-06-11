@@ -11,7 +11,7 @@
 }
 
 .story-list-item .story-title {
-  max-width: 600px;
+  max-width: 525px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
